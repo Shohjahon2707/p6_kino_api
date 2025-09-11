@@ -19,7 +19,7 @@ class Language(BaseModel):
 
 class Movie(BaseModel):
     title = models.CharField(max_length=255)
-    country = models.CharField(max_length=100, blank=True, null=True)
+    country = models.ForeignKey(Country,on_delete=models.CASCADE )
     description = models.TextField(blank=True, null=True)
     age_restriction = models.SmallIntegerField(default=0)
     release_year = models.DateField()

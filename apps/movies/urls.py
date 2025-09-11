@@ -1,27 +1,12 @@
 from django.urls import path
-from .views import (
-    GenreListCreateView, GenreDetailView,
-    LanguageListCreateView, LanguageDetailView,
-    MovieListCreateView, MovieDetailView,
-    MovieAudioListCreateView, MovieAudioDetailView,
-    MovieSubtitleListCreateView, MovieSubtitleDetailView,
-    PosterImageListCreateView, PosterImageDetailView,
-    MovieFileListCreateView, MovieFileDetailView
-)
+from apps.movies.api_endpoints.genre.GenreList import GenreListView
+from apps.movies.api_endpoints.movie.MovieDetail import MovieDetailView
+from apps.movies.api_endpoints.movieaudio.views import MovieAudioDetailView
+from apps.movies.api_endpoints.subtitle.views import MovieSubtitleView
 
 urlpatterns = [
-    path("genres/", GenreListCreateView.as_view(), name="genre-list"),
-    path("genres/<int:pk>/", GenreDetailView.as_view(), name="genre-detail"),
-    path("languages/", LanguageListCreateView.as_view(), name="language-list"),
-    path("languages/<int:pk>/", LanguageDetailView.as_view(), name="language-detail"),
-    path("", MovieListCreateView.as_view(), name="movie-list"),
-    path("<int:pk>/", MovieDetailView.as_view(), name="movie-detail"),
-    path("audios/", MovieAudioListCreateView.as_view(), name="audio-list"),
-    path("audios/<int:pk>/", MovieAudioDetailView.as_view(), name="audio-detail"),
-    path("subtitles/", MovieSubtitleListCreateView.as_view(), name="subtitle-list"),
-    path("subtitles/<int:pk>/", MovieSubtitleDetailView.as_view(), name="subtitle-detail"),
-    path("posters/", PosterImageListCreateView.as_view(), name="poster-list"),
-    path("posters/<int:pk>/", PosterImageDetailView.as_view(), name="poster-detail"),
-    path("files/", MovieFileListCreateView.as_view(), name="file-list"),
-    path("files/<int:pk>/", MovieFileDetailView.as_view(), name="file-detail"),
+    path("genres/", GenreListView.as_view(), name="genre-list"),
+    path("<int:pk>/", MovieDetailView.as_view(), name= "Movie_detail"),
+    path('audios/<int:pk>/', MovieAudioDetailView.as_view(), name='Audios_list'),
+    path("subtitles/<int:pk>/",MovieSubtitleView.as_view(), name='Subtitle'),
 ]
