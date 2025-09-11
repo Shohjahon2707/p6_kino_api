@@ -53,10 +53,24 @@ class PosterImage(BaseModel):
         return f"Poster for {self.movie.title} ({self.language})"
 
 
+
+
+
+from django.db import models
+
+
+
+QUALITY_CHOICES = [
+        ("480p", "480p"),
+        ("720p", "720p HD"),
+        ("1080p", "1080p Full HD"),
+        ("4K", "4K Ultra HD"),
+    ]
+
 class MovieFile(BaseModel):
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
     language = models.ForeignKey(Language,on_delete=models.PROTECT)
     file = models.FileField(upload_to="movies/videos")
-
+    quality = models.CharField(max_length=10, choices=QUALITY_CHOICES, default="720p")
     def __str__(self):
-        return f"File: {self.movie.title} ({self.language})"
+        return f"{self.movie.title} ({self.quality})"
