@@ -7,6 +7,8 @@ from apps.common.models import BaseModel
 
 class Country(BaseModel):
     name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.name
 class Genre(BaseModel):
     name = models.CharField(max_length=100, unique=True)
 
@@ -15,6 +17,8 @@ class Genre(BaseModel):
 
 class Language(BaseModel):
     name = models.CharField(max_length=100, unique=True)
+    def __str__(self):
+        return self.name
 
 
 class Movie(BaseModel):
@@ -74,3 +78,12 @@ class MovieFile(BaseModel):
     quality = models.CharField(max_length=10, choices=QUALITY_CHOICES, default="720p")
     def __str__(self):
         return f"{self.movie.title} ({self.quality})"
+        
+class WatchSession(BaseModel):
+    movie = models.ForeignKey(Movie,on_delete=models.CASCADE)
+    device = models.CharField(max_length=200)
+    language = models.ForeignKey(Language,on_delete=models.PROTECT)
+    country = models.ForeignKey(Country,on_delete=models.CASCADE)
+    subtitle = models.ForeignKey(MovieSubtitle,on_delete=models.CASCADE)
+    quality = models.CharField(max_length=10,choices=QUALITY_CHOICES,default="720p")
+    
