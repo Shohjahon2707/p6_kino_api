@@ -5,4 +5,3 @@ from .movie import *
 from .movieaudio import *
 from .subtitle import *
 from .moviefile import *
-from .watchsession import *

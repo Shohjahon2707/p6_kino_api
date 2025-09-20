@@ -4,7 +4,12 @@ from apps.movies.api_endpoints.movie.MovieDetail import MovieDetailView
 from apps.movies.api_endpoints.movieaudio.views import MovieAudioDetailView
 from apps.movies.api_endpoints.subtitle.views import MovieSubtitleView
 from apps.movies.api_endpoints.moviefile.views import MovieFileView
-from apps.movies.api_endpoints.watchsession.views import MovieWatchSessionView
+from apps.meta.api_endpoints.watchsession.views import WatchSessionCreateView
+from apps.meta.api_endpoints.like.views import MovieLikeView
+from apps.meta.api_endpoints.comment import (
+    CommentCreateView,
+    CommentListView
+)
 
 urlpatterns = [
     path("genres/", GenreListView.as_view(), name="genre-list"),
@@ -12,5 +17,8 @@ urlpatterns = [
     path('audios/<int:pk>/', MovieAudioDetailView.as_view(), name='Audios_list'),
     path("subtitles/<int:pk>/",MovieSubtitleView.as_view(), name='Subtitle'),
     path("moviefile/<int:pk>/",MovieFileView.as_view(), name="Movie-file"),
-    path("watchsession/<int:pk>/",MovieWatchSessionView.as_view(), name="Watch-Session"),
+    path('watchsession/<int:pk>/', WatchSessionCreateView.as_view(), name='watchsession-create'),
+    path("comments/<int:movie_id>/", CommentListView.as_view(), name="movie-comments"),
+    path("comments/create/", CommentCreateView.as_view(), name="comment-create"),
+    path("likes/create/", MovieLikeView.as_view(), name="like-create"),
 ]
